@@ -16,6 +16,8 @@ if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
     require_once dirname(__FILE__) . '/inc/autoload.php';
 }
 
+use GetVisitor\Admin\Admin_Menu;
+
 class Get_Visitor{
 
     use GetVisitor\Get_Visitor_Table;
@@ -33,6 +35,9 @@ class Get_Visitor{
 
         // create database table
         register_activation_hook( __FILE__, [ $this, 'create_db_table' ] );
+
+        // create admin menu
+        new Admin_Menu;
         
     }
 
