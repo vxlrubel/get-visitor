@@ -17,6 +17,7 @@ if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
 }
 
 use GetVisitor\Admin\Admin_Menu;
+use GetVisitor\Admin\Get_Visitor_Template;
 
 class Get_Visitor{
 
@@ -94,5 +95,7 @@ class Get_Visitor{
 function get_visitor(){
     return Get_Visitor::get_instance();
 }
+
+$get_visitor = new Get_Visitor_Template;
 
 get_visitor();
