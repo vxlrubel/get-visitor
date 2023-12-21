@@ -29,6 +29,7 @@ class Admin_Menu{
      * @return void
      */
     public function create_admin_menu(){
+
         add_menu_page(
             __( 'Get Visitor', 'GV_DOMAIN' ),  // page title
             __( 'Get Visitor', 'GV_DOMAIN' ),  // menu title
@@ -39,6 +40,16 @@ class Admin_Menu{
             20                                 // position
         );
 
+        // create submenu
+        add_submenu_page(
+            $this->slug_admin_menu,             // parent slug
+            __( 'Visitor List', 'GV_DOMAIN' ),  // page title
+            __( 'Visitor List', 'GV_DOMAIN' ),  // menu title
+            'manage_options',                   // capability
+            $this->slug_admin_menu,             // menu slug
+            [ $this, '_cb_create_menu_page' ],  // callback
+            5                                   // position
+        );
     }
     
 }
