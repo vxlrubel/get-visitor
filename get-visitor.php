@@ -17,6 +17,9 @@ class Get_Visitor{
     // create instance
     private static $instance;
 
+    // plugin version
+    private $version = '1.0';
+
     public function __construct(){
 
         // define constant
