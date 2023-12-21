@@ -11,6 +11,11 @@ Author: Rubel Mahmud ( Sujan )
 
 // use Wsf\Inc\Subscribe_REST_API_CONTROLLER;
 
+// include autoload file
+if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
+    require_once dirname(__FILE__) . '/inc/autoload.php';
+}
+
 
 class Get_Visitor{
 
