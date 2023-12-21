@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 
 $files = [
     'get-visitor-table',
+    'admin/class-admin-menu',
 ];
 
 foreach ( $files as $file ) {
