@@ -18,6 +18,15 @@ defined('ABSPATH') || exit;
     // define table name
     private $table = 'get_visitor';
 
+    // create admin menu slug
+    protected $slug_admin_menu = 'get-visitors';
+
+    // create slug for settings options
+    protected $slug_admin_settings = 'get-visitors-settings';
+
+    // create slug for add visitor
+    protected $slug_add_new = 'add-new-visitor';
+
     /**
      * generate the table name with dynamic prefix
      *
