@@ -5,15 +5,15 @@ namespace GetVisitor\Admin;
 // derectly access denied
 defined('ABSPATH') || exit;
 
+use GetVisitor\Get_Visitor_Table as Database_Table;
+
+
 /**
- * create a trait
+ * create a Admin_Menu class to create admin menu
  * @version 1.0
  * @author Rubel Mahmud <vxlrubel@gmail.com>
  * @link https://github.com/vxlrubel
  */
-
-use GetVisitor\Get_Visitor_Table as Database_Table;
-
 class Admin_Menu{
     
     use Database_Table;
@@ -77,7 +77,8 @@ class Admin_Menu{
      * @return void
      */
     public function _cb_create_menu_page(){
-        
+        global $get_visitor;
+        $get_visitor->display_visitor_list();
     }
 
     /**
