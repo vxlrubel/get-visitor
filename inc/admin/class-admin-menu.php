@@ -48,7 +48,26 @@ class Admin_Menu{
             'manage_options',                   // capability
             $this->slug_admin_menu,             // menu slug
             [ $this, '_cb_create_menu_page' ],  // callback
-            5                                   // position
+        );
+
+        // create submenu for create new visitor
+        add_submenu_page(
+            $this->slug_admin_menu,                // parent slug
+            __( 'Add New Visitor', 'GV_DOMAIN' ),  // page title
+            __( 'Add New', 'GV_DOMAIN' ),          // menu title
+            'manage_options',                      // capability
+            $this->slug_add_new,                   // menu slug
+            [ $this, '_cb_add_visitor_page' ],     // callback
+        );
+
+        // create submenu settings
+        add_submenu_page(
+            $this->slug_admin_menu,                // parent slug
+            __( 'Visitor Options', 'GV_DOMAIN' ),  // page title
+            __( 'Options', 'GV_DOMAIN' ),          // menu title
+            'manage_options',                      // capability
+            $this->slug_admin_settings,            // menu slug
+            [ $this, '_cb_visitor_options_page' ], // callback
         );
     }
 
@@ -58,6 +77,24 @@ class Admin_Menu{
      * @return void
      */
     public function _cb_create_menu_page(){
+        
+    }
+
+    /**
+     * create callback function to create a new visitor
+     *
+     * @return void
+     */
+    public function _cb_add_visitor_page(){
+        
+    }
+
+    /**
+     * create callback function to display the settings options
+     *
+     * @return void
+     */
+    public function _cb_visitor_options_page(){
         
     }
     
