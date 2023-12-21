@@ -51,5 +51,14 @@ class Admin_Menu{
             5                                   // position
         );
     }
+
+    /**
+     * create callback function to display the visitor list
+     *
+     * @return void
+     */
+    public function _cb_create_menu_page(){
+        
+    }
     
 }
