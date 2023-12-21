@@ -16,9 +16,10 @@ if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
     require_once dirname(__FILE__) . '/inc/autoload.php';
 }
 
-
 class Get_Visitor{
 
+    use Get_Visitor_Table;
+    
     // create instance
     private static $instance;
 
@@ -29,6 +30,8 @@ class Get_Visitor{
 
         // define constant
         $this->define_constant();
+
+        echo $this->table();
         
     }
 
