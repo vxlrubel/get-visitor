@@ -8,7 +8,7 @@ $files = [
 ];
 
 foreach ( $files as $file ) {
-    if ( file_exists( dirname(__FILE__) . '/' . $file ) ) {
-        require_once dirname(__FILE__) . "/{$file}.php";
+    if( file_exists(  dirname( __FILE__ ) . '/' . $file . '.php' ) ){
+        require_once dirname( __FILE__ ) . '/' . $file . '.php';
     }
 }
