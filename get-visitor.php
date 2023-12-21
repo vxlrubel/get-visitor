@@ -18,9 +18,24 @@ class Get_Visitor{
     private static $instance;
 
     public function __construct(){
+
+        // define constant
+        $this->define_constant();
         
     }
 
+    /**
+     * define constant
+     *
+     * @return void
+     */
+    public function define_constant(){
+        define( 'GV_DOMAIN', 'get-visitor' );
+        define( 'GV_VERSION', $this->version );
+        define( 'GV_ASSETS', trailingslashit( plugins_url( 'assets', __FILE__ ) ) );
+        define( 'GV_ASSETS_ADMIN', trailingslashit( plugins_url( GV_ASSETS . '/admin', __FILE__ ) ) );
+    }
+    
     /**
      * get instance of the class
      *
