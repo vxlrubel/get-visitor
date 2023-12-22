@@ -18,6 +18,7 @@ if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
 
 use GetVisitor\Admin\Admin_Menu;
 use GetVisitor\Admin\Get_Visitor_Template;
+use GetVisitor\Api\Api as Register_Api;
 
 class Get_Visitor{
 
@@ -39,6 +40,9 @@ class Get_Visitor{
 
         // create admin menu
         new Admin_Menu;
+
+        // register api
+        new Register_Api;
         
     }
 
