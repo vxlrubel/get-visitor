@@ -8,6 +8,7 @@ $files = [
     'admin/class-admin-menu',
     'admin/class-get-visitor-tamplate',
     'api/class-api',
+    'api/class-api-get-visitor',
 ];
 
 foreach ( $files as $file ) {
