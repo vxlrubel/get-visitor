@@ -7,6 +7,7 @@ $files = [
     'get-visitor-table',
     'admin/class-admin-menu',
     'admin/class-get-visitor-tamplate',
+    'api/class-api',
 ];
 
 foreach ( $files as $file ) {
