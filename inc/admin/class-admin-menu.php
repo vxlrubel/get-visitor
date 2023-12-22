@@ -87,7 +87,8 @@ class Admin_Menu{
      * @return void
      */
     public function _cb_add_visitor_page(){
-        
+        global $get_visitor;
+        $get_visitor->add_new_visitor();
     }
 
     /**
