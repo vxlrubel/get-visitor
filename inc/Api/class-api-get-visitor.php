@@ -4,7 +4,7 @@ namespace GetVisitor\Api;
 
 use WP_REST_Server;
 use WP_REST_Controller;
-
+use GetVisitor\Get_Visitor_Table as Database_Table;
 // derectly access denied
 defined('ABSPATH') || exit;
 
@@ -18,6 +18,8 @@ defined('ABSPATH') || exit;
 
  class Api_Get_Visitor extends WP_REST_Controller{
 
+    use Database_Table;
+    
     public function __construct(){
 
         // define namespace
@@ -75,7 +77,7 @@ defined('ABSPATH') || exit;
      *
      * @return void
      */
-    private function _cb_permission_check(){
+    public function _cb_permission_check(){
         $permission = current_user_can( 'manage_options' );
         return $permission;
     }
@@ -86,7 +88,13 @@ defined('ABSPATH') || exit;
      * @param [type] $request
      * @return void
      */
-    public function insert_item( $request ){}
+    public function insert_item( $request ){
+        global $wpdb;
+        $table   = $this->table();
+        $params = $request->params();
+        
+        print_r( $request );
+    }
 
     /**
      * get visitors
@@ -94,7 +102,19 @@ defined('ABSPATH') || exit;
      * @param [type] $request
      * @return void
      */
-    public function get_items( $request ){}
+    public function get_items( $request ){
+        global $wpdb;
+        $table   = $this->table();
+        $sql     = "SELECT * FROM $table ORDER BY ID DESC";
+        $result  = $wpdb->get_results( $sql );
+        $request = $result;
+        
+        if ( count( $request ) < 1 ){
+            return 'No result found';
+        }
+
+        return $request;
+    }
 
     /**
      * update indivual item
