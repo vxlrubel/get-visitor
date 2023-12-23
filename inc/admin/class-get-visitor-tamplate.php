@@ -13,6 +13,25 @@ defined('ABSPATH') || exit;
  */
 class Get_Visitor_Template{
 
+    public function __construct(){
+        add_shortcode( 'get_visitor_form', [ $this, 'data_collection_form' ] );
+    }
+
+    public function data_collection_form(){
+        ob_start(); ?>
+            <div class="gv-collect-form">
+                <h2 class="form-title">Subscribe Us</h2>
+                <p>Your email address will be secure with us. Your privacy is our prime concern.</p>
+                <form action="javascript">
+                    <input type="email" placeholder="Email Address">
+                    <button type="submit">Subscribe</button>
+                </form>
+                <span class="notice">Subscription successfull.</span>
+            </div>
+
+        <?php return ob_get_clean();
+    }
+
     /**
      * display visitor list
      *
