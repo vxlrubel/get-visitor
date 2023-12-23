@@ -22,11 +22,11 @@ class Get_Visitor_Template{
             <div class="gv-collect-form">
                 <h2 class="form-title">Subscribe Us</h2>
                 <p>Your email address will be secure with us. Your privacy is our prime concern.</p>
-                <form action="javascript">
-                    <input type="email" placeholder="Email Address">
+                <form action="javascript:void(0)">
+                    <input type="email" placeholder="example@domail.com">
                     <button type="submit">Subscribe</button>
                 </form>
-                <span class="notice">Subscription successfull.</span>
+                <span class="notice success">Subscription successfull.</span>
             </div>
 
         <?php return ob_get_clean();
