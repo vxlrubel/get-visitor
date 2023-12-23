@@ -31,14 +31,13 @@ class Assets{
         wp_enqueue_style(
             'gv-style',                  // handle
             GV_ASSETS . 'css/style.css', // source
-            [''],                        // deps
+            [],                          // deps
             GV_VERSION,                  // version
-            'all'                        // media
         );
 
         wp_enqueue_script(
             'gv-script',                       // handle
-            GV_ASSETS . 'js/admin-script.js',  // source
+            GV_ASSETS . 'js/main.js',          // source
             ['jquery'],                        // deps
             GV_VERSION,                        // version
             true                               // in footer
@@ -54,9 +53,8 @@ class Assets{
         wp_enqueue_style(
             'gv-admin-style',                  // handle
             GV_ASSETS_ADMIN . 'css/style.css', // source
-            [''],                              // deps
+            [],                                // deps
             GV_VERSION,                        // version
-            'all'                              // media
         );
 
         wp_enqueue_script(
