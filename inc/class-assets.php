@@ -42,6 +42,10 @@ class Assets{
             GV_VERSION,                        // version
             true                               // in footer
         );
+        
+        wp_localize_script( 'gv-script', 'GV', [
+            'nonce' => wp_create_nonce('wp_rest')
+        ] );
     }
 
     /**
