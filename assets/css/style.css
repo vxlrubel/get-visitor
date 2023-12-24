@@ -75,6 +75,7 @@
 	padding-left: 9px;
 	color: var(--color-dark);
 	font-weight: 600;
+	margin-bottom: 5px;
 }
 .gv-collect-form .notice.success{
     border-color: var(--color-green);
