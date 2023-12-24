@@ -91,9 +91,19 @@ defined('ABSPATH') || exit;
     public function insert_item( $request ){
         global $wpdb;
         $table   = $this->table();
-        $params = $request->params();
+        $params = $request->get_params();
         
-        print_r( $request );
+        $data = [
+            'email' => sanitize_email( $params['email'] )
+        ];
+
+        $insert_result = $wpdb->insert( $table, $data );
+
+        if( $insert_result === false ){
+            return new WP_Error( 'failed_insert', 'Failed to insert data', [ 'status' => 500 ] );
+        }
+
+        return 'Subscription successfull.';
     }
 
     /**
