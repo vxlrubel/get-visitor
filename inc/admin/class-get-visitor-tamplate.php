@@ -24,9 +24,10 @@ class Get_Visitor_Template{
                 <p>Your email address will be secure with us. Your privacy is our prime concern.</p>
                 <form action="javascript:void(0)">
                     <input type="email" placeholder="example@domail.com">
-                    <button type="submit">Subscribe</button>
+                    <div class="submit-parent">
+                        <button type="submit">Subscribe</button>
+                    </div>
                 </form>
-                <span class="notice success">Subscription successfull.</span>
             </div>
 
         <?php return ob_get_clean();
