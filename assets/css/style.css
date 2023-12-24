@@ -1,3 +1,11 @@
+:root{
+	--color-red: #eb3b5a;
+	--color-orange: #fa8231;
+	--color-green: #20bf6b;
+	--color-dark: #2d3436;
+	--color-primary: #2271b1;
+	--color-primary-hover: #135e96;
+}
 .gv-collect-form,
 .gv-collect-form *{
     box-sizing: border-box;
@@ -35,42 +43,92 @@
     border-radius: 4px;
 }
 .gv-collect-form input[type="email"]:focus{
-    border-color: #2271b1;
-    box-shadow:0 0 0 1px #2271b1;
+    border-color: var(--color-primary);
+    box-shadow:0 0 0 1px var(--color-primary);
 }
 .gv-collect-form button {
 	display: block;
     min-width: 100px;
-	border: 1px solid #2271b1;
+	border: 1px solid var(--color-primary);
 	border-radius: 4px;
 	outline: 0;
-	background: #2271b1;
+	background: var(--color-primary);
 	color: #ffffff;
 	padding: 7px 20px;
 	cursor: pointer;
 }
 .gv-collect-form button:hover{
-    background-color: #135e96;
-    border-color: #135e96;
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
 }
 .gv-collect-form button:focus {
     border-color: #fff;
-	box-shadow: 0 0 0 2px #2271b1;
+	box-shadow: 0 0 0 2px var(--color-primary);
 }
 
 .gv-collect-form .notice {
-	display: block;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	font-size: 80%;
 	border-left: 3px solid transparent;
 	padding-left: 9px;
-	color: #444444;
+	color: var(--color-dark);
 	font-weight: 600;
 }
 .gv-collect-form .notice.success{
-    border-color: green;
-    color: green;
+    border-color: var(--color-green);
+    color: var(--color-green);
 }
 .gv-collect-form .notice.warning{
-    border-color: #e89c11;
-    color: #e89c11;
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+}
+.gv-collect-form .notice span.close{
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: 20px;
+	height: 20px;
+	font-size: 10px;
+	font-weight: 300;
+	color: var(--color-red);
+	border: 1px solid var(--color-red);
+	border-radius: 50%;
+	cursor: pointer;
+}
+.gv-collect-form .notice span.close:hover{
+	background-color: var(--color-red);
+	color: white;
+}
+.gv-collect-form .submit-parent {
+	display: inline-flex;
+	align-items: center;
+}
+.gv-collect-form .spin {
+	position: relative;
+	display: inline-block;
+	height: 22px;
+	width: 22px;
+	background: #2d3436;
+	margin-left: 15px;
+	border-radius: 50%;
+	animation: loading-spin 0.55s linear infinite;
+}
+.gv-collect-form .spin::after{
+	position: absolute;
+	height: 6px;
+	width: 6px;
+	background-color: #fff;
+	top: 4px;
+	left: calc(50% - 3px);
+	content: '';
+	border-radius: 50%;
+}
+@keyframes loading-spin{
+	0%{
+		transform: rotate(0deg);
+	}100%{
+		transform: rotate(360deg);
+	}
 }
