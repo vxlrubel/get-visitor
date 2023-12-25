@@ -57,7 +57,7 @@ class Assets{
     public function dashboard_scripts(){
         wp_enqueue_style(
             'gv-admin-style',                  // handle
-            GV_ASSETS_ADMIN . 'css/style.css', // source
+            GV_ASSETS_ADMIN . 'css/admin-style.css', // source
             [],                                // deps
             GV_VERSION,                        // version
         );
@@ -69,6 +69,11 @@ class Assets{
             GV_VERSION,                              // version
             true                                     // in footer
         );
+
+        wp_localize_script( 'gv-admin-script', 'GV', [
+            'nonce'   => wp_create_nonce('wp_rest'),
+            'api_url' => home_url( '/wp-json/getvisitor/v1/visitor' ),
+        ] );
     }
    
 }
