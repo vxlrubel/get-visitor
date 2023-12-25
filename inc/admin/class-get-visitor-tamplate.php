@@ -51,16 +51,10 @@ class Get_Visitor_Template{
      */
     public function add_new_visitor(){
         ?>
-            <div class="wrap">
+            <div class="wrap add-new-visitor">
                 <h1 class="wp-heading-inline">Add New Visitor</h1>
                 <a href="javascript:void(0)" class="page-title-action">Visitor list</a>
                 <hr class="wp-header-end">
-                <div class="notice notice-success is-dismissible"> 
-                    <p><strong>Email add successfully.</strong></p>
-                    <button type="button" class="notice-dismiss">
-                        <span class="screen-reader-text">Dismiss this notice.</span>
-                    </button>
-                </div>
                 <form action="javascript:void(0)" novalidate="novalidate">
                     <table class="form-table" role="presentation">
                         <tbody>
