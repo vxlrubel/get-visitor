@@ -43,6 +43,9 @@ class Get_Visitor_Template{
         echo "<div class=\"wrap get-visitor-list-parent\"> \n";
         echo '<h1 class="wp-heading-inline">Visitor List</h1>';
         $visitor_list->prepare_items();
+        echo "<form method=\"POST\" name=\"get_visitor_form\" action=\"{$_SERVER['PHP_SELF']}?page=get-visitors\">";
+            $visitor_list->search_box( 'Search', 'search_contact_info' );
+            echo '</form>';
         $visitor_list->display();
         echo "<div> \n";
     }
