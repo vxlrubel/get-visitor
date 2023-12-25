@@ -43,6 +43,7 @@ class Get_Visitor_Template{
         echo "<div class=\"wrap get-visitor-list-parent\"> \n";
         echo '<h1 class="wp-heading-inline">Visitor List</h1>';
         $visitor_list->prepare_items();
+        $visitor_list->display();
         echo "<div> \n";
     }
 
