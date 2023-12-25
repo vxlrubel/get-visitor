@@ -39,8 +39,10 @@ class Get_Visitor_Template{
      * @return void
      */
     public function display_visitor_list(){
+        $visitor_list = new Visitor_List_Table;
         echo "<div class=\"wrap get-visitor-list-parent\"> \n";
-        echo 'hello world';
+        echo '<h1 class="wp-heading-inline">Visitor List</h1>';
+        $visitor_list->prepare_items();
         echo "<div> \n";
     }
 
