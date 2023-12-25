@@ -39,3 +39,10 @@
         transform: rotate(360deg);
     }
 }
+
+.get-visitor-list-parent .item-will-be-delete {
+	background: var(--color-red) !important;
+}
+.get-visitor-list-parent .item-will-be-delete * {
+	color: white !important;
+}
