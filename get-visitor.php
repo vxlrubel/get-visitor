@@ -82,7 +82,7 @@ class Get_Visitor{
         define( 'GV_DOMAIN', 'get-visitor' );
         define( 'GV_VERSION', $this->version );
         define( 'GV_ASSETS', trailingslashit( plugins_url( 'assets', __FILE__ ) ) );
-        define( 'GV_ASSETS_ADMIN', trailingslashit( plugins_url( GV_ASSETS . 'admin', __FILE__ ) ) );
+        define( 'GV_ASSETS_ADMIN', trailingslashit( GV_ASSETS . 'admin' ) );
     }
     
     /**
