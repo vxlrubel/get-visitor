@@ -1,16 +1,58 @@
 ;(($)=>{
-    const doc    = $(document);
-    const form   = $('.add-new-visitor form');
-    const apiUrl = GV.api_url;
-    const nonce  = GV.nonce;
+    const doc        = $(document);
+    const form       = $('.add-new-visitor form');
+    const apiUrl     = GV.api_url;
+    const nonce      = GV.nonce;
+    const listParent = $('.get-visitor-list-parent');
     class GV_ADMIN_SCRIPT{
         constructor(){
             this.addNewVisitor();
             this.deleteVisitor();
+            this.updateVisitor();
+        }
+
+        
+
+        updateVisitor(){
+            listParent.on('click', 'a.edit-visitor-item', function(e){
+                e.preventDefault();
+                let _this = $(this);
+                let id    = parseInt(_this.data('id'));
+                let api_get_single_item = apiUrl + '/' + id;
+                let headers = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+                // get single item
+                $.ajax({
+                    type      : 'GET',
+                    url       : api_get_single_item,
+                    headers   : headers,
+                    beforeSend: ()=>{},
+                    success   : (res)=>{
+                        let email = res[0].email;
+                        $('body').append(`
+                            <div class="gv-get-single-item">
+                                <form action="javascript:void(0)">
+                                    <input type="email" value="">
+                                    <input type="submit" value="Save Changes" class="button button-primary">
+                                </form>
+                            </div>
+
+                        `);
+                    },
+                    error     : (err)=>{
+                        alert( err );
+                    }
+                });
+
+                
+
+
+            });
         }
 
         deleteVisitor(){
-            const listParent = $('.get-visitor-list-parent');
             listParent.on('click', 'a.delete-visitor-item', function(e){
                 e.preventDefault();
 
