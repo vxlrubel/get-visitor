@@ -7,6 +7,7 @@ $files = [
     'get-visitor-table',
     'admin/class-admin-menu',
     'admin/class-get-visitor-tamplate',
+    'admin/class-visitor-list-table',
     'api/class-api',
     'api/class-api-get-visitor',
     'class-assets',
