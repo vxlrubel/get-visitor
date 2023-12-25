@@ -116,6 +116,34 @@ if ( ! class_exists('WP_List_Table') ){
         );
     }
 
+    public function column_email( $item ){
+
+        $link_edit = sprintf(
+            '<a href="javascript:void(0)" class="edit-visitor-item" data-id="%s">%s</a>',
+            (int)$item['ID'],
+            esc_html( 'Edit' )
+        );
+
+        $link_delete = sprintf(
+            '<a href="javascript:void(0)" class="delete-visitor-item" data-id="%s">%s</a>',
+            (int)$item['ID'],
+            esc_html( 'Delete' )
+        );
+        
+        $action = [
+            'edit'   => $link_edit,
+            'delete' => $link_delete,
+        ];
+
+        return sprintf(
+            '%1$s %2$s',
+            $item['email'],
+            $this->row_actions( $action )
+        );
+        
+        
+    }
+
     /**
      * set default columns
      *
