@@ -160,7 +160,30 @@ defined('ABSPATH') || exit;
      * @param [type] $request
      * @return void
      */
-    public function update_item( $request ){}
+    public function update_item( $request ){
+        global $wpdb;
+        $table  = $this->table();
+        $params = $request->get_params();
+        $id     = (int)$params['id'];
+        $email  = sanitize_email( $params['email'] );
+        $data   = [
+            'email' => $email
+        ];
+        $where_clause = [
+            'id' => $id
+        ];
+        $data_format = ['%s'];
+        $where_clause_format = ['%d'];
+
+
+        $update_result = $wpdb->update( $table, $data, $where_clause, $data_format, $where_clause_format );
+
+        if ( $update_result === false ){
+            return new WP_Error('failed_update', 'Failed to update data', array('status' => 500));
+        }
+
+        return 'update successfully';
+    }
 
     /**
      * delete indivual item
