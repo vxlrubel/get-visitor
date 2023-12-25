@@ -1,0 +1,41 @@
+:root{
+	--color-red: #eb3b5a;
+	--color-orange: #fa8231;
+	--color-green: #20bf6b;
+	--color-dark: #2d3436;
+	--color-primary: #2271b1;
+	--color-primary-hover: #135e96;
+}
+.add-new-visitor .spin {
+    position: relative;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	color: transparent;
+	overflow: hidden;
+	background: var(--color-dark);
+	margin-left: 10px;
+	border-radius: 50%;
+    animation: loading-spin 0.75s linear infinite;
+}
+.add-new-visitor .spin::after{
+    position: absolute;
+    top: 3px;
+    left: calc(50% - 2px);
+    height: 4px;
+    width: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    content: '';
+}
+.add-new-visitor .submit {
+	display: flex;
+	align-items: center;
+}
+@keyframes loading-spin{
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}
