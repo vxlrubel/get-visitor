@@ -43,8 +43,19 @@ if ( ! class_exists('WP_List_Table') ){
         $data          = $this->get_data();
         $hidden_column = $this->get_hidden_columns();
 
+        // for pagination
+        $items_per_page = 10;
+        $current_page   = $this->get_pagenum();
+        $total_items    = (int) count( $data );
+        $this->set_pagination_args([
+            'total_items' => $total_items,
+			'per_page'    => $items_per_page,
+        ]);
+
+        $slice_data = array_slice( $data, ( $current_page - 1 ) * $items_per_page, $items_per_page );
+
         $this->_column_headers = [ $get_columns, $hidden_column ];
-        $this->items           = $data;
+        $this->items = $slice_data;
     }
 
 
