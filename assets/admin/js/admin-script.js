@@ -8,12 +8,11 @@
         constructor(){
             this.addNewVisitor();
             this.deleteVisitor();
+            this.fetchSingleItem();
             this.updateVisitor();
         }
 
-        
-
-        updateVisitor(){
+        fetchSingleItem(){
             listParent.on('click', 'a.edit-visitor-item', function(e){
                 e.preventDefault();
                 let _this = $(this);
@@ -33,23 +32,60 @@
                         let email = res[0].email;
                         $('body').append(`
                             <div class="gv-get-single-item">
-                                <form action="javascript:void(0)">
-                                    <input type="email" value="">
-                                    <input type="submit" value="Save Changes" class="button button-primary">
+                                <form action="javascript:void(0)" class="update-visitor-item">
+                                    <input type="email" value="${email}">
+                                    <p>
+                                        <input type="submit" value="Save Changes" class="button button-primary">
+                                        <input type="hidden" value="${id}">
+                                        <button type="button" class="button">Cancel</button>
+                                    </p>
                                 </form>
                             </div>
 
                         `);
                     },
                     error     : (err)=>{
-                        alert( err );
+                        alert( 'Something went wrong.' );
+                    }
+                });
+            });
+        }
+
+        updateVisitor(){
+            $('body').on('submit', 'form.update-visitor-item', function(e){
+                e.preventDefault();
+                let _this = $(this);
+                let id    = parseInt(_this.find('input[type="hidden"]').val());
+                let email = _this.find('input[type="email"]').val();
+                let api_update_url = apiUrl + '/' + id;
+                let data = {
+                    email : email
+                }
+                let headers = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+
+                $.ajax({
+                    type      : 'PATCH',
+                    url       : api_update_url,
+                    data      : JSON.stringify(data),
+                    headers   : headers,
+                    beforeSend: ()=>{
+                        console.log('loading...')
+                    },
+                    success   : (res)=>{
+                        console.log(res)
+                    },
+                    error     : (err)=>{
+                        console.log('Something went wrong.')
                     }
                 });
 
+
+
                 
-
-
-            });
+            })
         }
 
         deleteVisitor(){
