@@ -8,7 +8,6 @@
             this.addNewVisitor();
             this.deleteVisitor();
         }
-        
 
         deleteVisitor(){
             const listParent = $('.get-visitor-list-parent');
