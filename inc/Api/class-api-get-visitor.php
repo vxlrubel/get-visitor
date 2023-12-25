@@ -59,6 +59,11 @@ defined('ABSPATH') || exit;
             '/' . $this->rest_base . '/(?P<id>[\d]+)',
             [
                 [
+                    'methods'             => WP_REST_Server::READABLE,
+                    'callback'            => [ $this, 'get_single_item' ],
+                    'permission_callback' => [ $this, '_cb_permission_check' ],
+                ],
+                [
                     'methods'             => WP_REST_Server::EDITABLE,
                     'callback'            => [ $this, 'update_item' ],
                     'permission_callback' => [ $this, '_cb_permission_check' ],
@@ -104,6 +109,29 @@ defined('ABSPATH') || exit;
         }
 
         return 'Subscription successfull.';
+    }
+
+    /**
+     * get single item for view details
+     *
+     * @param [type] $request
+     * @return [string] $email
+     */
+    public function get_single_item( $request ){
+        global $wpdb;
+        $table  = $this->table();
+        $params = $request->get_params();
+        $id     = (int)$params['id'];
+        $sql    = "SELECT email FROM $table WHERE ID = $id";
+        $result = $wpdb->get_results( $sql, ARRAY_A );
+
+        if ( count( $result ) === 1 ){
+            $email = $result;
+        }else{
+            $email = 'Email address not found';
+        }
+
+        return $email;
     }
 
     /**
