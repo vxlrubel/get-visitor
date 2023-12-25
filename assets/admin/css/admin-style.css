@@ -46,3 +46,34 @@
 .get-visitor-list-parent .item-will-be-delete * {
 	color: white !important;
 }
+
+/* update form */
+.gv-get-single-item {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99999;
+}
+.gv-get-single-item form {
+	background: white;
+	padding: 25px;
+	border-radius: 4px;
+	width: 100%;
+	max-width: 400px;
+	box-sizing: border-box;
+}
+.gv-get-single-item form input[type="email"]{
+	width: 100%;
+}
+.gv-get-single-item form p{
+	margin-bottom: 0;
+}
+.gv-get-single-item form button{
+	margin-left: 15px !important;
+}
