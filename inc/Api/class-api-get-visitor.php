@@ -140,5 +140,23 @@ defined('ABSPATH') || exit;
      * @param [type] $request
      * @return void
      */
-    public function delete_item( $request ){}
+    public function delete_item( $request ){
+        global $wpdb;
+        $table  = $this->table();
+        $id     = (int)$request['id'];
+
+        // print_r( $id );
+        // return;
+
+        $where_clause        = [ 'ID' => $id ];
+        $where_clause_format = ['%d'];
+        
+        $delete_result = $wpdb->delete( $table, $where_clause, $where_clause_format );
+
+        if ( $delete_result === false ){
+            return new WP_Error('failed_delete', 'Failed to delete data', [ 'status' => 500 ] );
+        }
+
+        return 'delete data successfully';
+    }
  }
