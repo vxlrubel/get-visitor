@@ -14,20 +14,36 @@
             const listParent = $('.get-visitor-list-parent');
             listParent.on('click', 'a.delete-visitor-item', function(e){
                 e.preventDefault();
+
+                let confirmation = confirm('Are You Sure?');
+
+                if( confirmation !== true )
+                    return;
+                
                 let _this = $(this);
                 let id = parseInt(_this.data('id'));
                 let api_delete_url = apiUrl + '/' + id;
+                let headers = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+                
                 $.ajax({
                     type      : 'DELETE',
                     url       : api_delete_url,
-                    beforeSend: (res)=>{
-                        console.log('loading...')
+                    headers   : headers,
+                    beforeSend: ()=>{
+                        _this.text('Deleting...');
                     },
-                    success   : (res)=>{
-                        console.log('deleted')
+                    success   : ()=>{
+                        _this.closest('tr')
+                            .addClass('item-will-be-delete')
+                            .fadeOut(300, ()=>{
+                                _this.closest('tr').remove();
+                            });
                     },
                     error     : ()=>{
-                        console.log('something went wrong.');
+                        alert('Something went wrong.')
                     }
                 });
 
