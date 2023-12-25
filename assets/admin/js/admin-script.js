@@ -6,8 +6,34 @@
     class GV_ADMIN_SCRIPT{
         constructor(){
             this.addNewVisitor();
+            this.deleteVisitor();
         }
+        
 
+        deleteVisitor(){
+            const listParent = $('.get-visitor-list-parent');
+            listParent.on('click', 'a.delete-visitor-item', function(e){
+                e.preventDefault();
+                let _this = $(this);
+                let id = parseInt(_this.data('id'));
+                let api_delete_url = apiUrl + '/' + id;
+                $.ajax({
+                    type      : 'DELETE',
+                    url       : api_delete_url,
+                    beforeSend: (res)=>{
+                        console.log('loading...')
+                    },
+                    success   : (res)=>{
+                        console.log('deleted')
+                    },
+                    error     : ()=>{
+                        console.log('something went wrong.');
+                    }
+                });
+
+            });
+        }
+        
         addNewVisitor(){
 
             // submit form
