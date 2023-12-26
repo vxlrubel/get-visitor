@@ -1,7 +1,7 @@
 <?php
 
 namespace GetVisitor\Admin;
-
+use GetVisitor\Get_Visitor_Table as Database_Table;
 // derectly access denied
 defined('ABSPATH') || exit;
 
@@ -12,6 +12,8 @@ defined('ABSPATH') || exit;
  * @link https://github.com/vxlrubel
  */
 class Get_Visitor_Template{
+
+    use Database_Table;
 
     public function __construct(){
         add_shortcode( 'get_visitor_form', [ $this, 'data_collection_form' ] );
@@ -42,6 +44,12 @@ class Get_Visitor_Template{
         $visitor_list = new Visitor_List_Table;
         echo "<div class=\"wrap get-visitor-list-parent\"> \n";
         echo '<h1 class="wp-heading-inline">Visitor List</h1>';
+        printf(
+            '<a href="%1$s" class="page-title-action">%2$s</a>',
+            esc_url( admin_url('admin.php?page='. $this->slug_add_new ) ),
+            esc_html('Add New')
+        );
+        echo '<hr class="wp-header-end">';
         $visitor_list->prepare_items();
         echo "<form method=\"POST\" name=\"get_visitor_form\" action=\"{$_SERVER['PHP_SELF']}?page=get-visitors\">";
             $visitor_list->search_box( 'Search', 'search_contact_info' );
@@ -59,7 +67,7 @@ class Get_Visitor_Template{
         ?>
             <div class="wrap add-new-visitor">
                 <h1 class="wp-heading-inline">Add New Visitor</h1>
-                <a href="javascript:void(0)" class="page-title-action">Visitor list</a>
+                <a href="<?php echo admin_url( 'admin.php?page=' . $this->slug_admin_menu );?>" class="page-title-action">Visitor list</a>
                 <hr class="wp-header-end">
                 <form action="javascript:void(0)" novalidate="novalidate">
                     <table class="form-table" role="presentation">
