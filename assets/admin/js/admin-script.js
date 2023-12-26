@@ -11,6 +11,17 @@
             this.fetchSingleItem();
             this.updateVisitor();
             this.destroyPopup();
+            this.destroyNotice();
+        }
+
+        destroyNotice(){
+            $('.wrap').on('click', 'button.notice-dismiss', function(e){
+                e.preventDefault();
+                let notice_item = $(this).closest('div.notice');
+                notice_item.fadeOut(300, ()=>{
+                    notice_item.remove();
+                })
+            });
         }
 
         destroyPopup(){
@@ -22,7 +33,6 @@
                 setTimeout((e)=>{
                     popup.remove();
                 }, 300);
-
             });
         }
 
@@ -73,11 +83,13 @@
         }
 
         updateVisitor(){
-            $('body').on('submit', 'form.update-visitor-item', function(e){
+            listParent.on('submit', 'form.update-visitor-item', function(e){
                 e.preventDefault();
                 let _this = $(this);
+                let popupBox = _this.closest('.gv-get-single-item');
                 let id    = parseInt(_this.find('input[type="hidden"]').val());
-                let email = _this.find('input[type="email"]').val();
+                let emailField = _this.find('input[type="email"]');
+                let email = emailField.val();
                 let api_update_url = apiUrl + '/' + id;
                 let data = {
                     email : email
@@ -93,13 +105,22 @@
                     data      : JSON.stringify(data),
                     headers   : headers,
                     beforeSend: ()=>{
-                        console.log('loading...')
+                        _this.find('input[type="submit"]').after('<span style="display:inline-block;margin-left:15px;">Updating...</span>');
                     },
-                    success   : (res)=>{
-                        console.log(res)
+                    success   : ()=>{
+                        _this.closest('td').find('span.get-email-address').text(email);
+                        _this.closest('.gv-get-single-item').addClass()
+                        popupBox.addClass('popup-reverse').removeClass('popupvisible');
+                        setTimeout(()=>{ popupBox.remove() }, 300);
+
+                        _this.closest('table').siblings('form').before(`
+                            <div class="notice notice-success is-dismissible"><p><strong>Update successfully.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>
+                        `);
                     },
-                    error     : (err)=>{
-                        console.log('Something went wrong.')
+                    error     : ()=>{
+                        _this.closest('table').siblings('form').before(`
+                            <div class="notice notice-warning is-dismissible"><p><strong>Something went wrong.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>
+                        `);
                     }
                 });
 
@@ -149,8 +170,6 @@
         }
         
         addNewVisitor(){
-
-            // submit form
             form.each(function(e){
                 $(this).on('submit', function(e){
                     e.preventDefault();
@@ -188,15 +207,6 @@
                     });
 
                 });
-            });
-
-            // destroy notice
-            $('.add-new-visitor').on('click', 'button.notice-dismiss', function(e){
-                e.preventDefault();
-                let notice_item = $(this).closest('div.notice');
-                notice_item.fadeOut(300, ()=>{
-                    notice_item.remove();
-                })
             });
         }
     }
