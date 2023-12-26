@@ -39,8 +39,11 @@ if ( ! class_exists('WP_List_Table') ){
      * @return void
      */
     public function prepare_items(){
+
+        $order_by      = isset( $_GET['orderby'] ) ? trim($_GET['orderby']) : 'ID';
+        $order         = isset( $_GET['order'] ) ? trim( $_GET['order'] ) : 'DESC';
         $get_columns   = $this->get_columns();
-        $data          = $this->get_data();
+        $data          = $this->get_data( $order_by, $order );
         $hidden_column = $this->get_hidden_columns();
 
         // for pagination
@@ -54,7 +57,9 @@ if ( ! class_exists('WP_List_Table') ){
 
         $slice_data = array_slice( $data, ( $current_page - 1 ) * $items_per_page, $items_per_page );
 
-        $this->_column_headers = [ $get_columns, $hidden_column ];
+        $sortable_column = $this->get_sortable_columns();
+
+        $this->_column_headers = [ $get_columns, $hidden_column, $sortable_column ];
         $this->items = $slice_data;
     }
 
@@ -68,15 +73,22 @@ if ( ! class_exists('WP_List_Table') ){
         return ['ID'];
     }
     
+    public function get_sortable_columns(){
+        $sortable_column = [
+            'email' => [ 'email', false ]
+        ];
+        return $sortable_column;
+    }
+    
     /**
      * get all the data
      *
      * @return void
      */
-    public function get_data(){
+    public function get_data( $order_by, $order ){
         global $wpdb;
         $table  = $this->table();
-        $sql    = "SELECT * FROM $table ORDER BY ID DESC";
+        $sql    = "SELECT * FROM $table ORDER BY $order_by $order";
         $result = $wpdb->get_results( $sql, ARRAY_A );
 
         if ( count( $result ) > 0 ){
