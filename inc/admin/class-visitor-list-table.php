@@ -136,7 +136,7 @@ if ( ! class_exists('WP_List_Table') ){
         ];
 
         return sprintf(
-            '%1$s %2$s',
+            '<span class="get-email-address">%1$s</span> %2$s',
             $item['email'],
             $this->row_actions( $action )
         );
