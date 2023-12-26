@@ -95,11 +95,16 @@ defined('ABSPATH') || exit;
      */
     public function insert_item( $request ){
         global $wpdb;
-        $table   = $this->table();
+        $table  = $this->table();
         $params = $request->get_params();
+        $email  = sanitize_email( $params['email'] );
+
+        if ( empty( $email ) ){
+            return '<span style="color:#eb3b5a">Faield, try again after fill the input field.</span>';
+        }
         
-        $data = [
-            'email' => sanitize_email( $params['email'] )
+        $data   = [
+            'email' => $email
         ];
 
         $insert_result = $wpdb->insert( $table, $data );
