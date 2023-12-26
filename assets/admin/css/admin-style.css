@@ -46,13 +46,14 @@
 .get-visitor-list-parent .item-will-be-delete * {
 	color: white !important;
 }
-
 /* update form */
+.gv-get-single-item,
+.gv-get-single-item *{
+	box-sizing: border-box;
+}
 .gv-get-single-item {
 	position: fixed;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: none;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -60,9 +61,24 @@
 	background: rgba(0, 0, 0, 0.3);
 	z-index: 99999;
 }
+.gv-get-single-item.popupvisible{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: gvpopupfadein 0.3s linear both;
+}
+.gv-get-single-item.popup-reverse{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: gvpopupfadein-reverse 0.3s linear both;
+}
+
+
+
 .gv-get-single-item form {
 	background: white;
-	padding: 25px;
+	padding: 15px 25px 25px;
 	border-radius: 4px;
 	width: 100%;
 	max-width: 400px;
@@ -76,4 +92,46 @@
 }
 .gv-get-single-item form button{
 	margin-left: 15px !important;
+}
+.gv-get-single-item input[type="email"]{
+	margin-bottom: 15px;
+}
+
+/* popup header */
+.gv-get-single-item .popup-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 600;
+	font-size: 18px;
+	margin-bottom: 15px;
+}
+.gv-get-single-item .popup-header span {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	height: 25px;
+}
+
+.gv-get-single-item .popup-header span.close {
+	width: 25px;
+	font-size: 13px;
+	background: var(--color-red);
+	color: white;
+	border-radius: 4px;
+	cursor: pointer;
+}
+@keyframes gvpopupfadein{
+	0%{
+		opacity: 0;
+	}100%{
+		opacity: 1;
+	}
+}
+@keyframes gvpopupfadein-reverse{
+	0%{
+		opacity: 1;
+	}100%{
+		opacity: 0;
+	}
 }
