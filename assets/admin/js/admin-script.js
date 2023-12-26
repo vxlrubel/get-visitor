@@ -195,7 +195,7 @@
                             _this.find('span.spin').fadeOut(300, (e)=>{
                                 _this.find('span.spin').remove();
                             });
-                            _this.before('<div class="notice notice-success is-dismissible"><p><strong>Email add successfully.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>');
+                            _this.before( `<div class="notice notice-success is-dismissible"><p><strong>${res}</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
                             _this.find('input[type="email"]').val('');
                         },
                         error     : ()=>{
