@@ -10,12 +10,27 @@
             this.deleteVisitor();
             this.fetchSingleItem();
             this.updateVisitor();
+            this.destroyPopup();
+        }
+
+        destroyPopup(){
+            listParent.on('click', 'span.close', function(e){
+                e.preventDefault();
+                let _this = $(this);
+                let popup = _this.closest('.gv-get-single-item');
+                popup.removeClass('popupvisible').addClass('popup-reverse');
+                setTimeout((e)=>{
+                    popup.remove();
+                }, 300);
+
+            });
         }
 
         fetchSingleItem(){
             listParent.on('click', 'a.edit-visitor-item', function(e){
                 e.preventDefault();
                 let _this = $(this);
+                let text = _this.text();
                 let id    = parseInt(_this.data('id'));
                 let api_get_single_item = apiUrl + '/' + id;
                 let headers = {
@@ -27,22 +42,28 @@
                     type      : 'GET',
                     url       : api_get_single_item,
                     headers   : headers,
-                    beforeSend: ()=>{},
+                    beforeSend: ()=>{
+                        _this.text('loading...');
+                    },
                     success   : (res)=>{
                         let email = res[0].email;
-                        $('body').append(`
+                        _this.closest('td').append(`
                             <div class="gv-get-single-item">
                                 <form action="javascript:void(0)" class="update-visitor-item">
+                                    <div class="popup-header">
+                                        <span>Edit Item</span>
+                                        <span class="close">&#x2716;</span>
+                                    </div>
                                     <input type="email" value="${email}">
                                     <p>
                                         <input type="submit" value="Save Changes" class="button button-primary">
                                         <input type="hidden" value="${id}">
-                                        <button type="button" class="button">Cancel</button>
                                     </p>
                                 </form>
                             </div>
-
                         `);
+                        $('.gv-get-single-item').addClass('popupvisible');
+                        _this.text(text);
                     },
                     error     : (err)=>{
                         alert( 'Something went wrong.' );
