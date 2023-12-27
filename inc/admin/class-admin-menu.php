@@ -97,7 +97,8 @@ class Admin_Menu{
      * @return void
      */
     public function _cb_visitor_options_page(){
-        
+        global $get_visitor;
+        $get_visitor->settings_option();
     }
     
 }
