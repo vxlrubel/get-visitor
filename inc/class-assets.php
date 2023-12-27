@@ -65,7 +65,7 @@ class Assets{
         wp_enqueue_script(
             'gv-admin-script',                       // handle
             GV_ASSETS_ADMIN . 'js/admin-script.js',  // source
-            ['jquery'],                              // deps
+            ['jquery', 'jquery-ui-tabs'],            // deps
             GV_VERSION,                              // version
             true                                     // in footer
         );
