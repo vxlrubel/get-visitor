@@ -6,12 +6,17 @@
     const listParent = $('.get-visitor-list-parent');
     class GV_ADMIN_SCRIPT{
         constructor(){
+            this.tabs();
             this.addNewVisitor();
             this.deleteVisitor();
             this.fetchSingleItem();
             this.updateVisitor();
             this.destroyPopup();
             this.destroyNotice();
+        }
+
+        tabs(){
+            $("#tabs").tabs();
         }
 
         destroyNotice(){
