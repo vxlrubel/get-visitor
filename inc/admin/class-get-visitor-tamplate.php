@@ -91,4 +91,122 @@ class Get_Visitor_Template{
         
         <?php
     }
+
+    public function settings_option(){
+        ?>
+            <div class="wrap gv-settings">
+                <h1 class="wp-heading-inline">Settings Option</h1>
+
+                <hr class="wp-header-end">
+
+                <div class="tab-parent">
+                    <div id="tabs">
+                        <ul>
+                            <li><a href="#general">General</a></li>
+                            <li><a href="#options">Options</a></li>
+                        </ul>
+
+                        <div id="general">
+                            <form action="javascript:void();" class="settings-general-form">
+                                <table class="form-table" role="presentation">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="title">Form Title</label>
+                                                <span class="small">Show the title in the frontend.</span>
+                                            </th>
+                                            <td>
+                                                <input type="text" class="regular-text" id="title">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="desc">Description</label>
+                                                <span class="small">Insert short description.</span>
+                                            </th>
+                                            <td>
+                                                <textarea id="desc" class="regular-text" rows="3"></textarea>
+                                                <span class="small">This descriptions show above the subscribe form.</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="placeholder">Placeholder</label>
+                                                <span class="small">Change placeholder text from here.</span>
+                                            </th>
+                                            <td>
+                                                <input type="text" class="regular-text" id="placeholder">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="success">Success</label>
+                                                <span class="small">Change success notice.</span>
+                                            </th>
+                                            <td>
+                                                <input type="text" class="regular-text" id="success">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="warning">Warning</label>
+                                                <span class="small">Change warning notice.</span>
+                                            </th>
+                                            <td>
+                                                <input type="text" class="regular-text" id="warning">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p class="submit">
+                                    <input type="submit" class="button button-primary" value="Save Changes">
+                                </p>
+
+                            </form>
+                        </div>
+
+                        <div id="options">
+                            <form action="javascript:void();" class="settings-option-form">
+                                <table class="form-table" role="presentation">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="item-count">Items</label>
+                                                <span class="small">Show items in the table data.</span>
+                                            </th>
+                                            <td>
+                                                <select name="" id="item-count" class="regular-text">
+                                                    <option value="10">10</option>
+                                                    <option value="15">15</option>
+                                                    <option value="20">20</option>
+                                                    <option value="25">25</option>
+                                                    <option value="30">30</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="desc">Description</label>
+                                                <span class="small">Insert short description.</span>
+                                            </th>
+                                            <td>
+                                                <textarea id="desc" class="regular-text" rows="3"></textarea>
+                                                <span class="small">This descriptions show above the subscribe form.</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p class="submit">
+                                    <input type="submit" class="button button-primary" value="Save Changes">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        <?php
+    }
 }
