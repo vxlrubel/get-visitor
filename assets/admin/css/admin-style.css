@@ -64,13 +64,13 @@
 .gv-get-single-item.popupvisible{
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	animation: gvpopupfadein 0.3s linear both;
 }
 .gv-get-single-item.popup-reverse{
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	animation: gvpopupfadein-reverse 0.3s linear both;
 }
 
@@ -83,6 +83,7 @@
 	width: 100%;
 	max-width: 400px;
 	box-sizing: border-box;
+	margin-top: 130px;
 }
 .gv-get-single-item form input[type="email"]{
 	width: 100%;
@@ -134,4 +135,39 @@
 	}100%{
 		opacity: 0;
 	}
+}
+
+/* settings style */
+.gv-settings .tab-parent {
+	background: white;
+	padding: 15px;
+	min-height: 300px;
+}
+
+.gv-settings .tab-parent ul {
+	display: flex;
+	margin: 0;
+	border-bottom: 1px solid #dee2e6;
+}
+.gv-settings .tab-parent ul li {
+	margin-bottom: 0;
+}
+.gv-settings .tab-parent ul a {
+	display: inline-flex;
+	padding: 7px 15px;
+	text-decoration: none;
+}
+.gv-settings .tab-parent ul li.ui-tabs-active.ui-state-active a {
+	background-color: var(--color-primary);
+	color: white;
+	box-shadow: none;
+}
+.gv-settings .tab-parent #tabs > div {
+	padding-top: 0;
+}
+.gv-settings .small {
+	display: block;
+	color: #888;
+	font-size: 85%;
+	margin: 5px 0;
 }
