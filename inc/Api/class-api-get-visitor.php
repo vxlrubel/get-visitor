@@ -19,6 +19,12 @@ defined('ABSPATH') || exit;
  class Api_Get_Visitor extends WP_REST_Controller{
 
     use Database_Table;
+
+    // defined settings route
+    private $settings = 'settings';
+
+    // general settings rest_base
+    private $settings_general = 'general';
     
     public function __construct(){
 
@@ -74,6 +80,20 @@ defined('ABSPATH') || exit;
                     'permission_callback' => [ $this, '_cb_permission_check' ],
                 ],
             ]
+        );
+
+        // register settings route
+        register_rest_route(
+            $this->namespace,
+            '/' . $this->settings . '/' . $this->settings_general,
+            [
+                [
+                    'methods'             => WP_REST_Server::CREATABLE,
+                    'callback'            => [ $this, 'settings_general' ],
+                    'permission_callback' => [ $this, '_cb_permission_check' ],
+                ]
+            ]
+
         );
     }
 
@@ -223,5 +243,42 @@ defined('ABSPATH') || exit;
         }
 
         return 'delete data successfully';
+    }
+
+    /**
+     * general settings
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function settings_general( $request ){
+
+        $params = $request->get_params();
+        
+        $title          = sanitize_text_field( $params['title'] );
+        $desc           = sanitize_textarea_field( $params['desc'] );
+        $placeholder    = sanitize_text_field( $params['placeholder'] );
+        $notice_success = sanitize_text_field( $params['notice_success'] );
+        $notice_warning = sanitize_text_field( $params['notice_warning'] );
+        
+        $request = [
+            'title'          => update_option( '_gv_form_title', $title ),
+            'desc'           => update_option( '_gv_form_desc', $desc ),
+            'placeholder'    => update_option( '_gv_placeholder', $placeholder ),
+            'notice_success' => update_option( '_gv_notice_success', $notice_success ),
+            'notice_warning' => update_option( '_gv_notice_warning', $notice_warning ),
+        ];
+
+        $result = [
+            'title'          => get_option( '_gv_form_title' ),
+            'desc'           => get_option( '_gv_form_desc' ),
+            'placeholder'    => get_option( '_gv_placeholder' ),
+            'notice_success' => get_option( '_gv_notice_success' ),
+            'notice_warning' => get_option( '_gv_notice_warning' ),
+        ];
+        
+        $response = rest_ensure_response( $result );
+        
+        return $response;
     }
  }
