@@ -16,6 +16,11 @@
             this.destroyPopup();
             this.destroyNotice();
             this.updateGeneralSettings();
+            this.resetGeneralSettings();
+        }
+
+        resetGeneralSettings(){
+            
         }
 
         updateGeneralSettings(){
