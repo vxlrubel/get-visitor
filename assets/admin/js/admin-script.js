@@ -20,7 +20,68 @@
         }
 
         resetGeneralSettings(){
-            
+            settings.on('click', 'input.reset-general-options', function(e){
+                e.preventDefault();
+                
+                let _this        = $(this);
+                let parent_form  = _this.closest('form.settings-general-form');
+                let _title       = parent_form.find('#title');
+                let _desc        = parent_form.find('#desc');
+                let _placeholder = parent_form.find('#placeholder');
+                let _success     = parent_form.find('#success');
+                let _warning     = parent_form.find('#warning');
+                let reset_url    = apiSettingsUrl + '/' + 'general' + '/' + 'reset';
+                let headers      = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+
+                let default_data  = {
+                    title      : 'Subscribe Us',
+                    email      : 'Your email address will be secure with us. Your privacy is our prime concern.',
+                    placeholder: 'example@domain.com',
+                    success    : 'Subscribe successfully.',
+                    warning    : 'Something went wrong.'
+                }
+                
+                let data         = {
+                    title         : default_data.title,
+                    desc          : default_data.email,
+                    placeholder   : default_data.placeholder,
+                    notice_success: default_data.success,
+                    notice_warning: default_data.warning
+                }
+
+                $.ajax({
+                    type      : 'POST',
+                    url       : reset_url,
+                    data      : JSON.stringify( data ),
+                    headers   : headers,
+                    beforeSend: ()=>{
+                        _this.val('Reseting...');
+                    },
+                    success   : (res)=>{
+                        if( res ){
+                            _this.val('Reset Default');
+                            parent_form.before( `<div class="notice notice-success is-dismissible"><p><strong>Settings updated successfully.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
+
+                            _title.val( res.title );
+                            _desc.text( res.desc );
+                            _placeholder.val( res.placeholder );
+                            _success.val( res.notice_success );
+                            _warning.val( res.notice_warning );
+                            
+                        }
+                    },
+                    error     : (err)=>{
+                        if( err ){
+                            parent_form.before( `<div class="notice notice-warning is-dismissible"><p><strong>Something went wrong.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
+                        }
+                    }
+                });
+
+                
+            });
         }
 
         updateGeneralSettings(){
