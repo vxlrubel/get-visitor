@@ -58,6 +58,7 @@ defined('ABSPATH') || exit;
 
         <p class="submit">
             <input type="submit" class="button button-primary" value="Save Changes">
+            <input type="reset" class="button reset-general-options" value="Reset Default">
         </p>
     </form>
 </div>
