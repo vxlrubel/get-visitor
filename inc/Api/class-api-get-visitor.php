@@ -44,7 +44,7 @@ defined('ABSPATH') || exit;
                 [
                     'methods'             => WP_REST_Server::CREATABLE,
                     'callback'            => [ $this, 'insert_item' ],
-                    'permission_callback' => [ $this, '_cb_permission_check' ],
+                    'permission_callback' => [ $this, '_cb_insert_permission_check' ],
                 ],
                 [
                     'methods'             => WP_REST_Server::READABLE,
@@ -85,6 +85,15 @@ defined('ABSPATH') || exit;
     public function _cb_permission_check(){
         $permission = current_user_can( 'manage_options' );
         return $permission;
+    }
+
+    /**
+     * check insert permission
+     *
+     * @return void
+     */
+    public function _cb_insert_permission_check(){
+        return true;
     }
 
     /**
