@@ -13,7 +13,7 @@ defined('ABSPATH') || exit;
                         <span class="small">Show the title in the frontend.</span>
                     </th>
                     <td>
-                        <input type="text" class="regular-text" id="title">
+                        <input type="text" class="regular-text" id="title" value="<?php echo esc_attr( get_option('_gv_form_title') );?>">
                     </td>
                 </tr>
                 <tr>
@@ -22,7 +22,7 @@ defined('ABSPATH') || exit;
                         <span class="small">Insert short description.</span>
                     </th>
                     <td>
-                        <textarea id="desc" class="regular-text" rows="3"></textarea>
+                        <textarea id="desc" class="regular-text" rows="3"><?php echo esc_html( get_option('_gv_form_desc') );?></textarea>
                         <span class="small">This descriptions show above the subscribe form.</span>
                     </td>
                 </tr>
@@ -32,7 +32,7 @@ defined('ABSPATH') || exit;
                         <span class="small">Change placeholder text from here.</span>
                     </th>
                     <td>
-                        <input type="text" class="regular-text" id="placeholder">
+                        <input type="text" class="regular-text" id="placeholder" value="<?php echo esc_attr( get_option('_gv_placeholder') );?>">
                     </td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@ defined('ABSPATH') || exit;
                         <span class="small">Change success notice.</span>
                     </th>
                     <td>
-                        <input type="text" class="regular-text" id="success">
+                        <input type="text" class="regular-text" id="success" value="<?php echo esc_attr( get_option('_gv_notice_success') );?>">
                     </td>
                 </tr>
                 <tr>
@@ -50,7 +50,7 @@ defined('ABSPATH') || exit;
                         <span class="small">Change warning notice.</span>
                     </th>
                     <td>
-                        <input type="text" class="regular-text" id="warning">
+                        <input type="text" class="regular-text" id="warning" value="<?php echo esc_attr( get_option('_gv_notice_warning') );?>">
                     </td>
                 </tr>
             </tbody>
@@ -59,6 +59,5 @@ defined('ABSPATH') || exit;
         <p class="submit">
             <input type="submit" class="button button-primary" value="Save Changes">
         </p>
-
     </form>
 </div>
