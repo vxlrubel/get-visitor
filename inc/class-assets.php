@@ -71,8 +71,9 @@ class Assets{
         );
 
         wp_localize_script( 'gv-admin-script', 'GV', [
-            'nonce'   => wp_create_nonce('wp_rest'),
-            'api_url' => home_url( '/wp-json/getvisitor/v1/visitor' ),
+            'nonce'            => wp_create_nonce('wp_rest'),
+            'api_url'          => home_url( '/wp-json/getvisitor/v1/visitor' ),
+            'api_settings_url' => home_url( '/wp-json/getvisitor/v1/settings' ),
         ] );
     }
    
