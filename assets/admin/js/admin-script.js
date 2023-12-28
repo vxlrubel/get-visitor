@@ -1,9 +1,11 @@
 ;(($)=>{
-    const doc        = $(document);
-    const form       = $('.add-new-visitor form');
-    const apiUrl     = GV.api_url;
-    const nonce      = GV.nonce;
-    const listParent = $('.get-visitor-list-parent');
+    const doc            = $(document);
+    const form           = $('.add-new-visitor form');
+    const apiUrl         = GV.api_url;
+    const apiSettingsUrl = GV.api_settings_url;
+    const nonce          = GV.nonce;
+    const listParent     = $('.get-visitor-list-parent');
+    const settings       = $('.gv-settings');
     class GV_ADMIN_SCRIPT{
         constructor(){
             this.tabs();
@@ -13,8 +15,50 @@
             this.updateVisitor();
             this.destroyPopup();
             this.destroyNotice();
+            this.updateGeneralSettings();
         }
 
+        updateGeneralSettings(){
+            settings.on('submit', 'form.settings-general-form', function(e){
+                e.preventDefault();
+                let _this      = $(this);
+                let button     = _this.find('input[type="submit"]');
+                let buttonText = button.val();
+                let generalUrl = apiSettingsUrl + '/' + 'general';
+                let data       = {
+                    title         : _this.find('#title').val(),
+                    desc          : _this.find('#desc').text(),
+                    placeholder   : _this.find('#placeholder').val(),
+                    notice_success: _this.find('#success').val(),
+                    notice_warning: _this.find('#warning').val(),
+                }
+                let headers    = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+
+                $.ajax({
+                    type      : 'POST',
+                    url       : generalUrl,
+                    data      : JSON.stringify( data ),
+                    headers   : headers,
+                    beforeSend: ()=>{
+                        button.val('saving...');
+                    },
+                    success   : (res)=>{
+                        if( res ){
+                            button.val(buttonText);
+                            _this.before( `<div class="notice notice-success is-dismissible"><p><strong>Settings updated successfully.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
+                        }
+                    },
+                    error     : (err)=>{
+                        console.log( 'Something went wrong:' + err);
+                    }
+                });
+
+            });
+        }
+        
         tabs(){
             $("#tabs").tabs();
         }
