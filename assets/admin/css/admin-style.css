@@ -171,3 +171,16 @@
 	font-size: 85%;
 	margin: 5px 0;
 }
+
+.button.reset-general-options {
+	margin-left: 15px;
+	background: #636e72 !important;
+	color: white;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+.button.reset-general-options:focus,
+.button.reset-general-options:hover{
+	background: #2d3436 !important;
+	color: white !important;
+}
