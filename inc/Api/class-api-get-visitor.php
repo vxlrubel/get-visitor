@@ -25,6 +25,9 @@ defined('ABSPATH') || exit;
 
     // general settings rest_base
     private $settings_general = 'general';
+
+    // setting reset base
+    private $settings_reset = 'reset';
     
     public function __construct(){
 
@@ -90,6 +93,19 @@ defined('ABSPATH') || exit;
                 [
                     'methods'             => WP_REST_Server::CREATABLE,
                     'callback'            => [ $this, 'settings_general' ],
+                    'permission_callback' => [ $this, '_cb_permission_check' ],
+                ]
+            ]
+
+        );
+        // register general setting reset
+        register_rest_route(
+            $this->namespace,
+            '/' . $this->settings . '/' . $this->settings_general . '/' . $this->settings_reset,
+            [
+                [
+                    'methods'             => WP_REST_Server::CREATABLE,
+                    'callback'            => [ $this, 'settings_general_reset' ],
                     'permission_callback' => [ $this, '_cb_permission_check' ],
                 ]
             ]
@@ -281,4 +297,15 @@ defined('ABSPATH') || exit;
         
         return $response;
     }
+
+    /**
+     * reset to default options
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function settings_general_reset( $request ){
+        return $this->settings_general( $request );
+    }
+
  }
