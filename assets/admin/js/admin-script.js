@@ -52,7 +52,9 @@
                         }
                     },
                     error     : (err)=>{
-                        console.log( 'Something went wrong:' + err);
+                        if( err ){
+                            _this.before( `<div class="notice notice-success is-dismissible"><p><strong>Something went wrong.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
+                        }
                     }
                 });
 
