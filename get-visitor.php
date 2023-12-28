@@ -39,6 +39,8 @@ class Get_Visitor{
         // create database table
         register_activation_hook( __FILE__, [ $this, 'create_db_table' ] );
 
+        register_activation_hook( __FILE__, [ $this, 'include_default_settings_options' ] );
+
         // create admin menu
         new Admin_Menu;
 
@@ -48,6 +50,34 @@ class Get_Visitor{
         // initiate assets
         new Assets;
         
+    }
+
+    /**
+     * default settings options
+     *
+     * @return void
+     */
+    public function include_default_settings_options(){
+
+        if ( empty( get_option('_gv_form_title') ) ){
+            update_option( '_gv_form_title', 'Subscribe Us' );
+        }
+
+        if ( empty( get_option('_gv_form_desc') ) ){
+            update_option( '_gv_form_desc', 'Your email address will be secure with us. Your privacy is our prime concern.' );
+        }
+
+        if ( empty( get_option('_gv_placeholder') ) ){
+            update_option( '_gv_form_desc', 'example@domain.com' );
+        }
+        
+        if ( empty( get_option('_gv_notice_success') ) ){
+            update_option( '_gv_form_desc', 'subscribe successfully.' );
+        }
+
+        if ( empty( get_option('_gv_notice_success') ) ){
+            update_option( '_gv_form_desc', 'something went wrong.' );
+        }
     }
 
     /**
