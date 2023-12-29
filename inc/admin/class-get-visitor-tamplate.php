@@ -104,13 +104,16 @@ class Get_Visitor_Template{
                         <ul>
                             <li><a href="#general">General</a></li>
                             <li><a href="#options">Options</a></li>
+                            <li><a href="#how-to-use">how to use</a></li>
                         </ul>
 
                         <?php
-                        
+
                             require_once dirname(__FILE__) . '/options/general.php';
 
                             require_once dirname(__FILE__) . '/options/options.php';
+                            
+                            require_once dirname(__FILE__) . '/options/how-to-use.php';
                         ?>
                     </div>
                 </div>
