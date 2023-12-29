@@ -22,10 +22,10 @@ class Get_Visitor_Template{
     public function data_collection_form(){
         ob_start(); ?>
             <div class="gv-collect-form">
-                <h2 class="form-title">Subscribe Us</h2>
-                <p>Your email address will be secure with us. Your privacy is our prime concern.</p>
+                <h2 class="form-title"><?php echo esc_html( get_option( '_gv_form_title' ) );?></h2>
+                <p><?php echo esc_html( get_option( '_gv_form_desc' ) );?></p>
                 <form action="javascript:void(0)">
-                    <input type="email" placeholder="example@domail.com">
+                    <input type="email" placeholder="<?php echo esc_attr( get_option( '_gv_form_desc' ) );?>">
                     <div class="submit-parent">
                         <button type="submit">Subscribe</button>
                     </div>
