@@ -93,7 +93,7 @@
                 let generalUrl = apiSettingsUrl + '/' + 'general';
                 let data       = {
                     title         : _this.find('#title').val(),
-                    desc          : _this.find('#desc').text(),
+                    desc          : _this.find('#desc').val(),
                     placeholder   : _this.find('#placeholder').val(),
                     notice_success: _this.find('#success').val(),
                     notice_warning: _this.find('#warning').val(),
