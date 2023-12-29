@@ -66,11 +66,10 @@
                             parent_form.before( `<div class="notice notice-success is-dismissible"><p><strong>Settings updated successfully.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
 
                             _title.val( res.title );
-                            _desc.text( res.desc );
+                            _desc.val( res.desc );
                             _placeholder.val( res.placeholder );
                             _success.val( res.notice_success );
                             _warning.val( res.notice_warning );
-                            
                         }
                     },
                     error     : (err)=>{
