@@ -17,6 +17,19 @@
             this.destroyNotice();
             this.updateGeneralSettings();
             this.resetGeneralSettings();
+            this.copyShortcode();
+        }
+
+        copyShortcode(){
+            $('.shortcode').on('click', '.copy-shortcode', function(e){
+                let text = $(this).siblings('.get-shortcode').text();
+                let createArea = $('<textarea>');
+                createArea.val(text);
+                $(this).after(createArea);
+                createArea.select();
+                document.execCommand('copy');
+                createArea.remove();
+            });
         }
 
         resetGeneralSettings(){
