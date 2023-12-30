@@ -26,6 +26,9 @@ defined('ABSPATH') || exit;
     // general settings rest_base
     private $settings_general = 'general';
 
+    // define option setting rest_base
+    private $settings_option = 'options';
+
     // setting reset base
     private $settings_reset = 'reset';
     
@@ -93,6 +96,19 @@ defined('ABSPATH') || exit;
                 [
                     'methods'             => WP_REST_Server::CREATABLE,
                     'callback'            => [ $this, 'settings_general' ],
+                    'permission_callback' => [ $this, '_cb_permission_check' ],
+                ]
+            ]
+
+        );
+        // register settings option route
+        register_rest_route(
+            $this->namespace,
+            '/' . $this->settings . '/' . $this->settings_option,
+            [
+                [
+                    'methods'             => WP_REST_Server::CREATABLE,
+                    'callback'            => [ $this, 'settings_option' ],
                     'permission_callback' => [ $this, '_cb_permission_check' ],
                 ]
             ]
@@ -306,6 +322,26 @@ defined('ABSPATH') || exit;
      */
     public function settings_general_reset( $request ){
         return $this->settings_general( $request );
+    }
+
+    /**
+     * set settings option for list item count
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function settings_option( $request ){
+        $params     = $request->get_params();
+        $list_count = sanitize_text_field( $params['list_count'] );
+        $request    = [
+            'list_count' => update_option( '_gv_list_items', (int)$list_count )
+        ];
+        $result     = [
+            'list_count' => get_option( '_gv_list_items' )
+        ];
+
+        $response = rest_ensure_response( $result );
+        return $response;
     }
 
  }
