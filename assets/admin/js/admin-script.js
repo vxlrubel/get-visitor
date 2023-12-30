@@ -18,6 +18,48 @@
             this.updateGeneralSettings();
             this.resetGeneralSettings();
             this.copyShortcode();
+            this.updateOptions();
+        }
+
+        updateOptions(){
+            settings.on('submit', '.settings-option-form', function(e){
+                e.preventDefault();
+                let _this      = $(this);
+                let itemValue  = _this.find('#item-count').val();
+                let _button    = _this.find('input[type="submit"]');
+                let _text      = _button.val();
+                let option_url = apiSettingsUrl + '/' + 'options';
+                let headers    = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+                let data       = {
+                    list_count : itemValue
+                }
+                $.ajax({
+                    type      : 'POST',
+                    url       : option_url,
+                    data      : JSON.stringify( data ),
+                    headers   : headers,
+                    beforeSend: ()=>{
+                        _button.val('Saving...');
+                    },
+                    success   : (res)=>{
+                        if( res ){
+                            _button.val(_text);
+                            _this.before( `<div class="notice notice-success is-dismissible"><p><strong>Settings updated successfully.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
+                        }
+                    },
+                    error     : (err)=>{
+                        if( err ){
+                            _this.before( `<div class="notice notice-warning is-dismissible"><p><strong>Something went wrong.</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>`);
+                        }
+                    }
+                });
+
+                
+
+            });
         }
 
         copyShortcode(){
