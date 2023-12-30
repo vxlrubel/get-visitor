@@ -213,3 +213,25 @@
 	background: #2d3436;
 	border-color: #2d3436;
 }
+
+.gv-settings .copy-notice {
+	position: relative;
+	background: #2d3436;
+	color: white;
+	margin-left: 20px;
+	font-size: 12px;
+	padding: 5px 15px !important;
+}
+
+.gv-settings .copy-notice::after{
+	position: absolute;
+	box-sizing: border-box;
+	height: 0;
+	width: 0;
+	border: 7px solid transparent;
+	border-right-color: #2d3436;
+	top: calc(50% - 7px);
+	right: 100%;
+	content: '';
+	z-index: 9999;
+}
