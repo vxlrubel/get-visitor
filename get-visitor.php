@@ -78,6 +78,10 @@ class Get_Visitor{
         if ( empty( get_option('_gv_notice_success') ) ){
             update_option( '_gv_form_desc', 'something went wrong.' );
         }
+
+        if( empty( get_option('_gv_list_items') ) ){
+            update_option( '_gv_list_items', 10 );
+        }
     }
 
     /**
