@@ -28,7 +28,13 @@
                 $(this).after(createArea);
                 createArea.select();
                 document.execCommand('copy');
+                $(this).after('<span class="copy-notice">Copied to clipboard</span>');
                 createArea.remove();
+                setTimeout(() => {
+                    $('.copy-notice').fadeOut(300, ()=>{
+                        $('.copy-notice').remove();
+                    });
+                }, 750);
             });
         }
 
