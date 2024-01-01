@@ -41,6 +41,9 @@ class Get_Visitor{
 
         register_activation_hook( __FILE__, [ $this, 'include_default_settings_options' ] );
 
+        // add plugin action links
+        add_filter( 'plugin_action_links', [ $this, 'settings_page_url' ], 10, 2 );
+
         // create admin menu
         new Admin_Menu;
 
@@ -50,6 +53,29 @@ class Get_Visitor{
         // initiate assets
         new Assets;
         
+    }
+
+    /**
+     * create settins link
+     *
+     * @param [type] $links
+     * @param [type] $file
+     * @return void
+     */
+    public function settings_page_url( $links, $file ){
+
+        if ( plugin_basename( __FILE__ ) === $file ){
+
+            $anchor = sprintf(
+                '<a href="%1$s">%2$s</a>',
+                esc_url( admin_url( '/admin.php?page='. $this->slug_admin_settings ) ),
+                'Settings'
+            );
+            
+            array_unshift( $links, $anchor );
+        }
+
+        return $links;
     }
 
     /**
