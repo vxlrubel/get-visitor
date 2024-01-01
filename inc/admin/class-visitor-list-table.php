@@ -198,4 +198,16 @@ if ( ! class_exists('WP_List_Table') ){
                 return 'No value';
         }
     }
+
+    /**
+     * set bulk actions
+     *
+     * @return void
+     */
+    public function get_bulk_actions(){
+        $actions = [
+            'delete' => 'Detete',
+        ];
+        return $actions;
+    }
  }
