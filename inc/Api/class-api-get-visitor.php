@@ -31,6 +31,9 @@ defined('ABSPATH') || exit;
 
     // setting reset base
     private $settings_reset = 'reset';
+
+    // multiple delete item base
+    private $multiple_delete = 'dropvisitors';
     
     public function __construct(){
 
@@ -99,8 +102,8 @@ defined('ABSPATH') || exit;
                     'permission_callback' => [ $this, '_cb_permission_check' ],
                 ]
             ]
-
         );
+
         // register settings option route
         register_rest_route(
             $this->namespace,
@@ -112,8 +115,8 @@ defined('ABSPATH') || exit;
                     'permission_callback' => [ $this, '_cb_permission_check' ],
                 ]
             ]
-
         );
+
         // register general setting reset
         register_rest_route(
             $this->namespace,
@@ -125,7 +128,19 @@ defined('ABSPATH') || exit;
                     'permission_callback' => [ $this, '_cb_permission_check' ],
                 ]
             ]
+        );
 
+        // register route for multiple delete
+        register_rest_route(
+            $this->namespace,
+            '/' . $this->multiple_delete,
+            [
+                [
+                    'methods'             => WP_REST_Server::DELETABLE,
+                    'callback'            => [ $this, 'multiple_delete' ],
+                    'permission_callback' => [ $this, '_cb_permission_check' ],
+                ]
+            ]
         );
     }
 
@@ -275,6 +290,34 @@ defined('ABSPATH') || exit;
         }
 
         return 'delete data successfully';
+    }
+
+    /**
+     * this method for multiple delete
+     *
+     * @param [type] $request
+     * @return void
+     */
+    public function multiple_delete( $request ){
+        global $wpdb;
+        $table  = $this->table();
+        $params = $request->get_params();
+        $ids    = $params['ids'];
+        
+        foreach ( $ids as $id ) {
+            $where_clause        = [ 'ID' => (int)$id ];
+            $where_clause_format = ['%d'];
+            $delete_result       = $wpdb->delete( $table, $where_clause, $where_clause_format );
+
+            if ( $delete_result === false ){
+                return new WP_Error('failed_delete', 'Failed to delete data', [ 'status' => 500 ] );
+            }
+            
+            $response = 'delete successfull.';
+        }
+
+        return rest_ensure_response( $response );
+
     }
 
     /**
