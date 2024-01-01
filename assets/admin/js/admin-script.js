@@ -19,6 +19,66 @@
             this.resetGeneralSettings();
             this.copyShortcode();
             this.updateOptions();
+            this.deleteMultipleVisitor();
+        }
+        
+        deleteMultipleVisitor(){
+            listParent.on('click', 'input#doaction[type="submit"]', function(e){
+                e.preventDefault();
+                let _this       = $(this);
+                let text        = _this.val();
+                let actionValue = _this.siblings('select#bulk-action-selector-top').val();
+                let checkboxes  = listParent.find('input[name="get_visitor[]"]:checked');
+                let itemValues  = checkboxes.map(
+                    function(){
+                        return this.value;
+                    }
+                ).get();
+                
+                if( itemValues.length === 0 ){
+                    return;
+                }
+                
+                if( actionValue !== 'delete' ){
+                    return;
+                }
+                
+                let multiple_delete_url = GV.multiple_delete;
+
+                let headers = {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce'  : nonce
+                }
+
+                let data = {
+                    ids : itemValues
+                }
+                
+                $.ajax({
+                    type      : 'DELETE',
+                    url       : multiple_delete_url,
+                    headers   : headers,
+                    data      : JSON.stringify(data),
+                    beforeSend: ()=>{
+                        _this.val('loading...');
+                    },
+                    success   : (res)=>{
+                        if(res){
+                            checkboxes
+                                .closest('tr')
+                                .addClass('item-will-be-delete')
+                                .fadeOut(300, ()=>{
+                                    checkboxes.closest('tr').remove();
+                                });
+                            _this.val(text);
+                        }
+                    },
+                    error     : ()=>{
+                        alert('something went wrong.');
+                    }
+                });
+                
+            })
         }
 
         updateOptions(){
