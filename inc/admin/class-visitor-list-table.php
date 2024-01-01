@@ -47,7 +47,7 @@ if ( ! class_exists('WP_List_Table') ){
         $hidden_column = $this->get_hidden_columns();
 
         // for pagination
-        $items_per_page = 10;
+        $items_per_page = get_option('_gv_list_items') ? get_option('_gv_list_items') : 10;
         $current_page   = $this->get_pagenum();
         $total_items    = (int) count( $data );
         $this->set_pagination_args([
