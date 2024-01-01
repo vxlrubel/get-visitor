@@ -74,6 +74,11 @@ if ( ! class_exists('WP_List_Table') ){
         return ['ID'];
     }
     
+    /**
+     * define sortable columns
+     *
+     * @return void
+     */
     public function get_sortable_columns(){
         $sortable_column = [
             'email' => [ 'email', false ]
