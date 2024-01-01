@@ -74,6 +74,7 @@ class Assets{
             'nonce'            => wp_create_nonce('wp_rest'),
             'api_url'          => home_url( '/wp-json/getvisitor/v1/visitor' ),
             'api_settings_url' => home_url( '/wp-json/getvisitor/v1/settings' ),
+            'multiple_delete'  => home_url( '/wp-json/getvisitor/v1/dropvisitors' ),
         ] );
     }
    
