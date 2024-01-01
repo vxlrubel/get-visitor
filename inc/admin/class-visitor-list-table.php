@@ -42,8 +42,9 @@ if ( ! class_exists('WP_List_Table') ){
 
         $order_by      = isset( $_GET['orderby'] ) ? trim($_GET['orderby']) : 'ID';
         $order         = isset( $_GET['order'] ) ? trim( $_GET['order'] ) : 'DESC';
+        $search_term   = isset( $_POST['s'] ) ? trim( $_POST['s'] ) : '';
         $get_columns   = $this->get_columns();
-        $data          = $this->get_data( $order_by, $order );
+        $data          = $this->get_data( $order_by, $order, $search_term );
         $hidden_column = $this->get_hidden_columns();
 
         // for pagination
@@ -85,17 +86,32 @@ if ( ! class_exists('WP_List_Table') ){
      *
      * @return void
      */
-    public function get_data( $order_by, $order ){
+    public function get_data( $order_by, $order, $search_term ){
         global $wpdb;
-        $table  = $this->table();
-        $sql    = "SELECT * FROM $table ORDER BY $order_by $order";
-        $result = $wpdb->get_results( $sql, ARRAY_A );
+        $table    = $this->table();
+        $response = '';
 
-        if ( count( $result ) > 0 ){
-            return $result;
+        if( ! empty( $search_term ) ){
+            $sql    = "SELECT * FROM $table WHERE email LIKE '%$search_term%'";
+            $result = $wpdb->get_results( $sql, ARRAY_A );
+
+            if ( $result > 0 ){
+                $response = $result;
+            }else{
+                $response = 'no result found.';
+            }
         }else{
-            return 'no data found';
+            $sql    = "SELECT * FROM $table ORDER BY $order_by $order";
+            $result = $wpdb->get_results( $sql, ARRAY_A );
+
+            if ( count( $result ) > 0 ){
+                $response = $result;
+            }else{
+                $response = 'data not found.';
+            }
         }
+        
+        return $response;
     }
 
     /**
