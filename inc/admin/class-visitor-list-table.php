@@ -206,4 +206,33 @@ if ( ! class_exists('WP_List_Table') ){
         ];
         return $actions;
     }
+
+    /**
+     * filterable method. it's allow to filer by date
+     *
+     * @param [type] $which
+     * @return void
+     */
+    public function extra_tablenav( $which ) {
+        $action = "{$_SERVER['PHP_SELF']}?page={$this->slug_admin_menu}";
+        if ($which === 'top'): ?>
+            <div class="alignleft actions">
+                <form action="<?php echo $action; ?>" class="gv-get-filter-form" method="POST">
+                    <div class="date-field">
+                        <div class="date-input from-date">
+                            <span>From</span>
+                            <input type="date" name="start_date">
+                        </div>
+                        <div class="date-input to-date">
+                            <span>To</span>
+                            <input type="date" name="end_date">
+                        </div>
+                    </div>
+                    <div class="filter-submit">
+                        <button type="submit" class="button action" name="date_submit">Apply</button>
+                    </div>
+                </form>
+            </div>
+        <?php endif;
+    }
  }
