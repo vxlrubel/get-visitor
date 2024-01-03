@@ -8,6 +8,7 @@ $files = [
     'admin/class-admin-menu',
     'admin/class-get-visitor-tamplate',
     'admin/class-visitor-list-table',
+    'admin/class-ajax-request',
     'api/class-api',
     'api/class-api-get-visitor',
     'class-assets',
