@@ -1,12 +1,13 @@
 ;(($)=>{
-    const doc            = $(document);
-    const form           = $('.add-new-visitor form');
-    const apiUrl         = GV.api_url;
-    const ajaxUrl        = GV.ajax_url;
-    const apiSettingsUrl = GV.api_settings_url;
-    const nonce          = GV.nonce;
-    const listParent     = $('.get-visitor-list-parent');
-    const settings       = $('.gv-settings');
+    const doc             = $(document);
+    const form            = $('.add-new-visitor form');
+    const apiUrl          = GV.api_url;
+    const ajaxUrl         = GV.ajax_url;
+    const apiSettingsUrl  = GV.api_settings_url;
+    const deactivationUrl = GV.deactivation_link;
+    const nonce           = GV.nonce;
+    const listParent      = $('.get-visitor-list-parent');
+    const settings        = $('.gv-settings');
     class GV_ADMIN_SCRIPT{
         constructor(){
             this.tabs();
@@ -22,8 +23,58 @@
             this.updateOptions();
             this.deleteMultipleVisitor();
             this.exportData();
+            this.deactivation();
         }
-        
+
+        deactivation(){
+            this.execute_popup_message();
+        }
+
+        execute_popup_message(){
+            $('[data-slug="get-visitor"]').on('click', '#deactivate-get-visitor', function(e){
+                e.preventDefault();
+                let _this  = $(this);
+                let parent = _this.closest('div.wrap').append(
+                    `
+                    <div class="gv-plugin-deactive-popup">
+                        <div class="flash-box">
+
+                            <div class="popup-title">
+                                <span>Choose a option!</span> <span>✖</span>
+                            </div>
+
+                            <ul class="popup-body">
+                                <li>
+                                    
+                                    <label>
+                                        <input type="radio" name="gv_database_table">
+                                        Delete the database table
+                                    </label>
+                                </li>
+                                <li>
+                                    
+                                    <label>
+                                        <input type="radio" name="gv_database_table">
+                                        Keep database table
+                                    </label>
+                                </li>
+                            </ul>
+
+                            <div class="popup-footer">
+                                <a href="${deactivationUrl}" class="deactive">Deactivate</a>
+                                <a href="javascript:void(0);">Cancel</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    `
+                );
+                
+                console.log( deactivationUrl)
+                $(this).after(`<a href="${deactivationUrl}">Deactivate</a>`)
+            });
+        }
+
         exportData(){
             listParent.on('click', '.gv-get-csv-data', function(e){
                 e.preventDefault();
