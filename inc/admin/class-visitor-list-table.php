@@ -165,6 +165,12 @@ if ( ! class_exists('WP_List_Table') ){
         );
     }
 
+    /**
+     * add row action inside the email column
+     *
+     * @param [type] $item
+     * @return void
+     */
     public function column_email( $item ){
 
         $link_edit = sprintf(
