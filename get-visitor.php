@@ -21,6 +21,7 @@ if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
 
 use GetVisitor\Assets;
 use GetVisitor\Admin\Admin_Menu;
+use GetVisitor\Admin\Ajax_Request;
 use GetVisitor\Admin\Get_Visitor_Template;
 use GetVisitor\Api\Api as Register_Api;
 
@@ -55,6 +56,9 @@ class Get_Visitor{
 
         // initiate assets
         new Assets;
+
+        // initiate the ajax request 
+        new Ajax_Request;
         
     }
 
