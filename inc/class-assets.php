@@ -75,6 +75,7 @@ class Assets{
             'api_url'          => home_url( '/wp-json/getvisitor/v1/visitor' ),
             'api_settings_url' => home_url( '/wp-json/getvisitor/v1/settings' ),
             'multiple_delete'  => home_url( '/wp-json/getvisitor/v1/dropvisitors' ),
+            'ajax_url'         => admin_url( 'admin-ajax.php' ),
         ] );
     }
    
