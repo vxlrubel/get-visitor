@@ -1,15 +1,18 @@
 <?php
 /*
-Plugin Name: Get Visitor
-Description: Get visitor is a subscription base plugin. It collect them email address of the visitor who is subscribe the website for ger getting new update and so one.
-Version: 1.0
-Author: Rubel Mahmud ( Sujan )
-*/
-
-// Add your plugin functionalities here
-// For demonstration purposes, let's include the description in the plugin page
-
-// use Wsf\Inc\Subscribe_REST_API_CONTROLLER;
+ * Plugin Name:       Get Visitor
+ * Plugin URI:        https://github.com/vxlrubel/get-visitor
+ * Description:       The "Get Visitor" WordPress plugin is a lightweight tool designed to facilitate email subscription collection from site visitors. Leveraging the WordPress REST API, this plugin provides an easy interface for visitors to subscribe to your email list. Upon visitor subscription through the provided form, their email addresses are securely collected and stored for your email marketing purposes.
+ * Version:           1.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            Rubel Mahmud ( Sujan )
+ * Author URI:        https://github.com/vxlrubel/
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       get-visitor
+ * Domain Path:       /lang
+ */
 
 // include autoload file
 if ( file_exists( dirname(__FILE__) . '/inc/autoload.php' ) ){
