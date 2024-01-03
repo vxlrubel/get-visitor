@@ -71,7 +71,6 @@ if ( ! class_exists('WP_List_Table') ){
         $this->items = $slice_data;
     }
 
-
     /**
      * HIDE COLUMNS
      *
@@ -102,7 +101,7 @@ if ( ! class_exists('WP_List_Table') ){
         global $wpdb;
         $table    = $this->table();
         $response = '';
-
+        
         if( ! empty( $search_term ) ){
             $sql    = "SELECT * FROM $table WHERE email LIKE '%$search_term%'";
             $result = $wpdb->get_results( $sql, ARRAY_A );
