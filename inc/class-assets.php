@@ -71,12 +71,25 @@ class Assets{
         );
 
         wp_localize_script( 'gv-admin-script', 'GV', [
-            'nonce'            => wp_create_nonce('wp_rest'),
-            'api_url'          => home_url( '/wp-json/getvisitor/v1/visitor' ),
-            'api_settings_url' => home_url( '/wp-json/getvisitor/v1/settings' ),
-            'multiple_delete'  => home_url( '/wp-json/getvisitor/v1/dropvisitors' ),
-            'ajax_url'         => admin_url( 'admin-ajax.php' ),
+            'nonce'             => wp_create_nonce('wp_rest'),
+            'api_url'           => home_url( '/wp-json/getvisitor/v1/visitor' ),
+            'api_settings_url'  => home_url( '/wp-json/getvisitor/v1/settings' ),
+            'multiple_delete'   => home_url( '/wp-json/getvisitor/v1/dropvisitors' ),
+            'ajax_url'          => admin_url( 'admin-ajax.php' ),
+            'deactivation_link' => esc_url( $this->get_plugin_deactiveation_url() ),
         ] );
+    }
+
+    /**
+     * create plugin deactivation link
+     *
+     * @return void
+     */
+    private function get_plugin_deactiveation_url(){
+        $plugin_file       = 'get-visitor/get-visitor.php';
+        $deactivation_link = wp_nonce_url( admin_url( 'plugins.php?action=deactivate&plugin=' . urlencode( $plugin_file ) ) , 'deactivate-plugin_' . $plugin_file  );
+
+        return $deactivation_link;
     }
    
 }
