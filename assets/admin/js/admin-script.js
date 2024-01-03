@@ -2,6 +2,7 @@
     const doc            = $(document);
     const form           = $('.add-new-visitor form');
     const apiUrl         = GV.api_url;
+    const ajaxUrl        = GV.ajax_url;
     const apiSettingsUrl = GV.api_settings_url;
     const nonce          = GV.nonce;
     const listParent     = $('.get-visitor-list-parent');
@@ -20,8 +21,36 @@
             this.copyShortcode();
             this.updateOptions();
             this.deleteMultipleVisitor();
+            this.exportData();
         }
         
+        exportData(){
+            listParent.on('click', '.gv-get-csv-data', function(e){
+                e.preventDefault();
+                let _this = $(this);
+                let text  = _this.text();
+                let data  = {
+                    action: 'export_get_visitors'
+                }
+                $.ajax({
+                    type   : 'POST',
+                    url    : ajaxUrl,
+                    data   : data,
+                    beforeSend: ()=>{
+                        _this.text('Exporting...');
+                    },
+                    success: (response)=>{
+                        let blob          = new Blob( [response] );
+                        let link          = document.createElement('a');
+                            link.href     = window.URL.createObjectURL(blob)
+                            link.download = `get-visitors_${Math.random()}.csv`;
+                        link.click();
+                        _this.text( text );
+                    }
+                });
+            });
+        }
+
         deleteMultipleVisitor(){
             listParent.on('click', 'input#doaction[type="submit"]', function(e){
                 e.preventDefault();
