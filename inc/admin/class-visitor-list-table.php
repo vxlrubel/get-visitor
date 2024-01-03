@@ -39,12 +39,19 @@ if ( ! class_exists('WP_List_Table') ){
      * @return void
      */
     public function prepare_items(){
+        $start_date = '';
+        $end_date   = '';
+
+        if ( isset( $_POST['date_submit'] ) ){
+            $start_date = isset( $_POST['start_date'] ) ? sanitize_text_field( $_POST['start_date'] ) : '';
+            $end_date = isset( $_POST['end_date'] ) ? sanitize_text_field( $_POST['end_date'] ) : '';
+        }
 
         $order_by      = isset( $_GET['orderby'] ) ? trim($_GET['orderby']) : 'ID';
         $order         = isset( $_GET['order'] ) ? trim( $_GET['order'] ) : 'DESC';
         $search_term   = isset( $_POST['s'] ) ? trim( $_POST['s'] ) : '';
         $get_columns   = $this->get_columns();
-        $data          = $this->get_data( $order_by, $order, $search_term );
+        $data          = $this->get_data( $order_by, $order, $search_term, $start_date, $end_date );
         $hidden_column = $this->get_hidden_columns();
 
         // for pagination
@@ -91,7 +98,7 @@ if ( ! class_exists('WP_List_Table') ){
      *
      * @return void
      */
-    public function get_data( $order_by, $order, $search_term ){
+    public function get_data( $order_by, $order, $search_term, $start_date, $end_date ){
         global $wpdb;
         $table    = $this->table();
         $response = '';
@@ -104,11 +111,24 @@ if ( ! class_exists('WP_List_Table') ){
                 $response = $result;
             }
         }else{
-            $sql    = "SELECT * FROM $table ORDER BY $order_by $order";
-            $result = $wpdb->get_results( $sql, ARRAY_A );
-
-            if ( $result > 0 ){
-                $response = $result;
+            if ( ! empty( $start_date ) && !empty( $end_date ) ){
+                $sql = $wpdb->prepare(
+                    "SELECT * FROM $table WHERE created_at BETWEEN %s AND %s",
+                    $start_date,
+                    $end_date
+                );
+                $result = $wpdb->get_results( $sql, ARRAY_A );
+                
+                if ( $result > 0 ){
+                    $response = $result;
+                }
+            }else{
+                $sql    = "SELECT * FROM $table ORDER BY $order_by $order";
+                $result = $wpdb->get_results( $sql, ARRAY_A );
+    
+                if ( $result > 0 ){
+                    $response = $result;
+                }
             }
         }
         
