@@ -1,5 +1,6 @@
 :root{
 	--color-red: #eb3b5a;
+	--color-red-hover: #b71540;
 	--color-orange: #fa8231;
 	--color-green: #20bf6b;
 	--color-dark: #2d3436;
@@ -269,4 +270,66 @@
 	border-right: 1px solid #2c3e50;
 	background-color: #2c3e50;
 	color: #fff;
+}
+
+.gv-plugin-deactive-popup {
+	position: fixed;
+	display: flex;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #00000038;
+	z-index: 99999;
+	justify-content: center;
+	align-items: flex-start;
+}
+.gv-plugin-deactive-popup .flash-box {
+	width: calc(100% - 30px);
+	max-width: 350px;
+	box-sizing: border-box;
+	background: white;
+	margin-top: 150px;
+	padding: 20px 30px;
+	border-radius: 4px;
+	border: 1px solid #dee2e6;
+}
+.gv-plugin-deactive-popup .flash-box .popup-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 500;
+}
+.gv-plugin-deactive-popup .flash-box .popup-footer {
+	float: right;
+}
+
+.gv-plugin-deactive-popup .flash-box .popup-footer a {
+	box-sizing: border-box;
+	display: inline-flex;
+	text-decoration: none;
+	border-radius: 4px;
+	align-items: center;
+	background: var(--color-red);
+	padding: 5px 15px 7px;
+	color: white;
+	font-size: 600;
+	border: 1px solid var(--color-red);
+	outline: 0;
+	box-shadow: none;
+}
+.gv-plugin-deactive-popup .flash-box .popup-footer a:hover{
+	background: var(--color-red-hover);
+}
+.gv-plugin-deactive-popup .flash-box .popup-footer a.deactive{
+	background-color: #fff;
+	color: var(--color-primary) !important;
+	border-color: var(--color-primary);
+}
+
+.gv-plugin-deactive-popup .flash-box .popup-footer a.deactive:hover{
+	background-color: var(--color-primary-hover);
+	border-color: var(--color-primary-hover);
+	color: white !important;
 }
