@@ -49,6 +49,13 @@ class Get_Visitor_Template{
             esc_url( admin_url('admin.php?page='. $this->slug_add_new ) ),
             esc_html('Add New')
         );
+
+        printf(
+            '<a href="%1$s" target="_blank" class="page-title-action gv-get-csv-data">%2$s</a>',
+            esc_url( admin_url('admin.php?page='. $this->slug_admin_menu ) ),
+            esc_html('Export CSV')
+        );
+
         echo '<hr class="wp-header-end">';
         $visitor_list->prepare_items();
         echo "<form method=\"POST\" name=\"get_visitor_form\" action=\"{$_SERVER['PHP_SELF']}?page=get-visitors\">";
