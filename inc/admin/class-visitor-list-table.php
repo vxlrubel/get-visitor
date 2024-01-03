@@ -102,17 +102,13 @@ if ( ! class_exists('WP_List_Table') ){
 
             if ( $result > 0 ){
                 $response = $result;
-            }else{
-                $response = 'no result found.';
             }
         }else{
             $sql    = "SELECT * FROM $table ORDER BY $order_by $order";
             $result = $wpdb->get_results( $sql, ARRAY_A );
 
-            if ( count( $result ) > 0 ){
+            if ( $result > 0 ){
                 $response = $result;
-            }else{
-                $response = 'data not found.';
             }
         }
         
