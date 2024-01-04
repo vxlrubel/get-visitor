@@ -45,6 +45,8 @@ class Get_Visitor{
 
         register_activation_hook( __FILE__, [ $this, 'include_default_settings_options' ] );
 
+        register_deactivation_hook( __FILE__, [ $this, 'plugin_deactive' ] );
+
         // add plugin action links
         add_filter( 'plugin_action_links', [ $this, 'settings_page_url' ], 10, 2 );
 
@@ -60,6 +62,18 @@ class Get_Visitor{
         // initiate the ajax request 
         new Ajax_Request;
         
+    }
+
+    /**
+     * plugin deactivate
+     *
+     * @return void
+     */
+    public function plugin_deactive(){
+        global $wpdb;
+        $table = $this->table();
+        $sql   =  "DROP TABLE IF EXISTS $table";
+        $wpdb->query( $sql );
     }
 
     /**
