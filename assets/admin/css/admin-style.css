@@ -333,3 +333,24 @@
 	border-color: var(--color-primary-hover);
 	color: white !important;
 }
+.gv-plugin-deactive-popup .flash-box .popup-body {
+	margin: 25px 0;
+}
+.gv-plugin-deactive-popup .flash-box .close {
+	font-size: 15px;
+	display: inline-flex;
+	height: 25px;
+	width: 25px;
+	background: var(--color-red);
+	color: white;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.gv-plugin-deactive-popup .flash-box .close:hover{
+	background-color: var(--color-red-hover);
+}
+.deactivation-popup-parent{
+	display: none;
+}
