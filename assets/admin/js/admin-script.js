@@ -31,47 +31,59 @@
         }
 
         execute_popup_message(){
+
+            // open popup
             $('[data-slug="get-visitor"]').on('click', '#deactivate-get-visitor', function(e){
                 e.preventDefault();
                 let _this  = $(this);
                 let parent = _this.closest('div.wrap').append(
                     `
-                    <div class="gv-plugin-deactive-popup">
-                        <div class="flash-box">
+                    <div class="deactivation-popup-parent">
+                        <div class="gv-plugin-deactive-popup">
+                            <div class="flash-box">
 
-                            <div class="popup-title">
-                                <span>Choose a option!</span> <span>✖</span>
+                                <div class="popup-title">
+                                    <span>Choose a option!</span> <span class="close" data-dismis-popup="true">✖</span>
+                                </div>
+
+                                <ul class="popup-body">
+                                    <li>
+                                        
+                                        <label>
+                                            <input type="radio" name="gv_database_table">
+                                            Delete the database table
+                                        </label>
+                                    </li>
+                                    <li>
+                                        
+                                        <label>
+                                            <input type="radio" checked="checked" name="gv_database_table">
+                                            Keep database table
+                                        </label>
+                                    </li>
+                                </ul>
+
+                                <div class="popup-footer">
+                                    <a href="${deactivationUrl}" class="deactive">Deactivate</a>
+                                    <a href="javascript:void(0);" data-dismis-popup="true">Cancel</a>
+                                </div>
+
                             </div>
-
-                            <ul class="popup-body">
-                                <li>
-                                    
-                                    <label>
-                                        <input type="radio" name="gv_database_table">
-                                        Delete the database table
-                                    </label>
-                                </li>
-                                <li>
-                                    
-                                    <label>
-                                        <input type="radio" name="gv_database_table">
-                                        Keep database table
-                                    </label>
-                                </li>
-                            </ul>
-
-                            <div class="popup-footer">
-                                <a href="${deactivationUrl}" class="deactive">Deactivate</a>
-                                <a href="javascript:void(0);">Cancel</a>
-                            </div>
-
                         </div>
                     </div>
                     `
                 );
-                
-                console.log( deactivationUrl)
-                $(this).after(`<a href="${deactivationUrl}">Deactivate</a>`)
+
+                $('.deactivation-popup-parent').fadeIn();
+            });
+
+            // destroy popup
+            $('.wrap').on('click', '[data-dismis-popup]', function(e){
+                e.preventDefault();
+                let dismisablePopup = $(this).closest('.deactivation-popup-parent');
+                dismisablePopup.fadeOut(300, ()=>{
+                    dismisablePopup.remove();
+                })
             });
         }
 
